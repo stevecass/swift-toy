@@ -13,6 +13,7 @@
 		B07ED61F197B0BA500214C14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B07ED61D197B0BA500214C14 /* Main.storyboard */; };
 		B07ED621197B0BA500214C14 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B07ED620197B0BA500214C14 /* Images.xcassets */; };
 		B07ED62D197B0BA500214C14 /* MnApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07ED62C197B0BA500214C14 /* MnApiClientTests.swift */; };
+		B07ED637197B0BC400214C14 /* ApiCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07ED636197B0BC400214C14 /* ApiCommunicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		B07ED626197B0BA500214C14 /* MnApiClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MnApiClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07ED62B197B0BA500214C14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B07ED62C197B0BA500214C14 /* MnApiClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnApiClientTests.swift; sourceTree = "<group>"; };
+		B07ED636197B0BC400214C14 /* ApiCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiCommunicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				B07ED617197B0BA500214C14 /* AppDelegate.swift */,
+				B07ED636197B0BC400214C14 /* ApiCommunicator.swift */,
 				B07ED619197B0BA500214C14 /* MasterViewController.swift */,
 				B07ED61B197B0BA500214C14 /* DetailViewController.swift */,
 				B07ED61D197B0BA500214C14 /* Main.storyboard */,
@@ -214,6 +217,7 @@
 				B07ED61C197B0BA500214C14 /* DetailViewController.swift in Sources */,
 				B07ED61A197B0BA500214C14 /* MasterViewController.swift in Sources */,
 				B07ED618197B0BA500214C14 /* AppDelegate.swift in Sources */,
+				B07ED637197B0BC400214C14 /* ApiCommunicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

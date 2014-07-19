@@ -8,10 +8,19 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, APIControllerProtocol {
 
     var objects = NSMutableArray()
+    var apiCommunicator = ApiCommunicator();
 
+    func didReceiveAPIResults(results: NSArray) {
+        println(results)
+        println(objects.count)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.objects.addObjectsFromArray(results)
+            self.tableView.reloadData()
+            })
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,6 +33,8 @@ class MasterViewController: UITableViewController {
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
         self.navigationItem.rightBarButtonItem = addButton
+        apiCommunicator.delegate = self
+        apiCommunicator.loadLatestThreads()
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,14 +68,16 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        println(objects.count)
         return objects.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ThreadCell", forIndexPath: indexPath) as UITableViewCell
 
-        let object = objects[indexPath.row] as NSDate
-        cell.textLabel.text = object.description
+        let object = objects[indexPath.row] as NSDictionary
+        cell.textLabel.text = object["thread_name"] as NSString
+        cell.detailTextLabel.text = object["topic_name"] as NSString
         return cell
     }
 
