@@ -12,12 +12,16 @@ protocol APIControllerProtocol {
     func didReceiveAPIResults(results: NSArray)
 }
 
-
 class ApiCommunicator: NSObject {
     var delegate: APIControllerProtocol?
+    var maxId = 0;
 
     func loadLatestThreads() {
         var urlPath = "http://localhost:3000/messages/latest"
+        if maxId > 0 {
+            urlPath = "http://localhost:3000/messages/newer/\(maxId)";
+        }
+
         var url: NSURL = NSURL(string: urlPath)
         var session = NSURLSession.sharedSession()
         var task = session.dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
@@ -33,7 +37,11 @@ class ApiCommunicator: NSObject {
                 // If there is an error parsing JSON, print it to the console
                 println("JSON Error \(err!.localizedDescription)")
             }
-            //var results: NSArray = jsonResult["results"] as NSArray
+
+            if jsonResult.count > 0 {
+                var latest = jsonResult[0] as NSDictionary;
+                self.maxId = latest["id"] as Int
+            }
 
             self.delegate?.didReceiveAPIResults(jsonResult)
             })

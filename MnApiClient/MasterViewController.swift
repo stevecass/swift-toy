@@ -14,11 +14,10 @@ class MasterViewController: UITableViewController, APIControllerProtocol {
     var apiCommunicator = ApiCommunicator();
 
     func didReceiveAPIResults(results: NSArray) {
-        println(results)
-        println(objects.count)
         dispatch_async(dispatch_get_main_queue(), {
             self.objects.addObjectsFromArray(results)
             self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
             })
     }
 
@@ -34,6 +33,13 @@ class MasterViewController: UITableViewController, APIControllerProtocol {
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
         self.navigationItem.rightBarButtonItem = addButton
         apiCommunicator.delegate = self
+        apiCommunicator.loadLatestThreads()
+        self.refreshControl = UIRefreshControl();
+        refreshControl.addTarget(self, action: "refreshInvoked", forControlEvents: UIControlEvents.ValueChanged )
+
+    }
+
+    func refreshInvoked() {
         apiCommunicator.loadLatestThreads()
     }
 
